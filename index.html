@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikrotik Products - Power Your Network</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* Header/Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #007bff;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 123, 255, 0.7), rgba(108, 117, 125, 0.7)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Home Section */
+        .home {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .home-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+        .home-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #6c757d;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .feature {
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+        .stat h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+        .stat p {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* Products Section */
+        .products {
+            text-align: center;
+        }
+        .products h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #007bff;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .product-info p {
+            margin-bottom: 1rem;
+            color: #6c757d;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+        .close {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .modal img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .specs-table th, .specs-table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        .specs-table th {
+            background-color: #f8f9fa;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #007bff;
+        }
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .whatsapp-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #25d366;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+            .stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header>
+        <nav>
+            <div class="logo">Mikrotik</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Power Your Network with Mikrotik</h1>
+            <p>Inovasi jaringan untuk masa depan digital</p>
+            <a href="#home" class="btn">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="home-content">
+            <h2>Solusi Jaringan Terdepan</h2>
+            <p>Mikrotik menyediakan perangkat keras dan perangkat lunak jaringan yang powerful, fleksibel, dan terjangkau untuk semua kebutuhan Anda.</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>RouterOS</h3>
+                    <p>Sistem operasi jaringan yang lengkap dan dapat dikustomisasi.</p>
+                </div>
+                <div class="feature">
+                    <h3>Perangkat Keras Berkualitas</h3>
+                    <p>Router, switch, dan access point yang dirancang untuk performa tinggi.</p>
+                </div>
+                <div class="feature">
+                    <h3>Dukungan Komunitas</h3>
+                    <p>Komunitas global yang aktif dan dukungan teknis yang handal.</p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <h4>25+</h4>
+                    <p>Tahun Pengalaman</p>
+                </div>
+                <div class="stat">
+                    <h4>100M+</h4>
+                    <p>Perangkat Terpasang</p>
+                </div>
+                <div class="stat">
+                    <h4>150+</h4>
+                    <p>Negara Pengguna</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2>Produk Kami</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="RouterBoard">
+                <div class="product-info">
+                    <h3>RouterBoard</h3>
+                    <p>Router powerful untuk berbagai aplikasi jaringan.</p>
+                    <button class="btn" onclick="openModal('routerboard')">Lihat Detail</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="hAP ac²">
+                <div class="product-info">
+                    <h3>hAP ac²</h3>
+                    <p>Access Point dual-band untuk WiFi cepat.</p>
+                    <button class="btn" onclick="openModal('hapac2')">Lihat Detail</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="CRS Series">
+                <div class="product-info">
+                    <h3>CRS Series</h3>
+                    <p>Cloud Router Switch untuk jaringan enterprise.</p>
+                    <button class="btn" onclick="openModal('crsseries')">Lihat Detail</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Product Details -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Content will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>Tentang Mikrotik</h2>
+        <p>Mikrotik adalah perusahaan teknologi Latvia yang didirikan pada tahun 1996. Kami fokus pada pengembangan perangkat keras dan perangkat lunak untuk jaringan komputer. Dengan RouterOS, kami menyediakan solusi jaringan yang powerful, fleksibel, dan terjangkau untuk berbagai skala bisnis.</p>
+        <p>Keunggulan kami: Inovasi berkelanjutan, dukungan komunitas yang kuat, dan produk yang dapat disesuaikan dengan kebutuhan spesifik.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Kontak Kami</h2>
+        <div class="contact-form">
+            <input type="text" placeholder="Nama" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Pesan" rows="5" required></textarea>
+            <button class="btn" type="submit">Kirim Pesan</button>
+        </div>
+        <a href="https://wa.me/+6281259490387?text=Halo, saya tertarik dengan produk Mikrotik" class="whatsapp-btn" target="_blank">Chat via WhatsApp</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Mikrotik. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Modal functionality
+        function openModal(product) {
+            const modal = document.getElementById('productModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            let content = '';
+            if (product === 'routerboard') {
+                content = `
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="RouterBoard">
+                    <h2>RouterBoard</h2>
+                    <p>RouterBoard adalah seri router yang powerful dan fleksibel untuk berbagai aplikasi jaringan. Cocok untuk home office, small business, hingga enterprise.</p>
+                    <table class="specs-table">
+                        <tr><th>CPU</th><td>Qualcomm IPQ-4019</td></tr>
+                        <tr><th>RAM</th><td>256 MB</td></tr>
+                        <tr><th>Storage</th><td>16 MB Flash</td></tr>
+                        <tr><th>Ports</th><td>5x Gigabit Ethernet</td></tr>
+                        <tr><th>Wireless</th><td>2.4/5 GHz dual-band</td></tr>
+                    </table>
+                `;
+            } else if (product === 'hapac2') {
+                content = `
+                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="hAP ac²">
+                    <h2>hAP ac²</h2>
+                    <p>hAP ac² adalah Access Point dual-band yang menyediakan WiFi cepat dan stabil untuk rumah atau kantor kecil.</p>
+                    <table class="specs-table">
+                        <tr><th>CPU</th><td>IPQ-4018</td></tr>
+                        <tr><th>RAM</th><td>128 MB</td></tr>
+                        <tr><th>Storage</th><td>16 MB Flash</td></tr>
+                        <tr><th>Wireless</th><td>2.4/5 GHz, 2x2 MIMO</td></tr>
+                        <tr><th>Ports</th><td>4x Gigabit Ethernet</td></tr>
+                    </table>
+                `;
+            } else if (product === 'crsseries') {
+                content = `
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="CRS Series">
+                    <h2>CRS Series</h2>
+                    <p>Cloud Router Switch seri untuk jaringan enterprise yang membutuhkan switching yang powerful dan manajemen cloud.</p>
+                    <table class="specs-table">
+                        <tr><th>CPU</th><td>Qualcomm Atheros QCA9531</td></tr>
+                        <tr><th>RAM</th><td>64 MB</td></tr>
+                        <tr><th>Ports</th><td>5x Gigabit Ethernet</td></tr>
+                        <tr><th>Switching</th><td>Cloud-managed</td></tr>
+                        <tr><th>Power</th><td>PoE support</td></tr>
+                    </table>
+                `;
+            }
+            
+            modalContent.innerHTML = content;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections except hero
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
